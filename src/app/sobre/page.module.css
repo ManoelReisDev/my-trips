@@ -31,6 +31,13 @@
 .description {
   max-width: 60rem;
   color: var(--white);
+}
+
+.description p {
   font-size: 2rem;
   line-height: 1.6;
+}
+
+.description p + p {
+  margin-top: 1.6rem;
 }
