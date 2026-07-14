@@ -6,3 +6,5 @@ export type ContentPage = {
   slug: string;
   body: PortableTextBlock[];
 };
+
+export type PageSlug = Pick<ContentPage, 'slug'>;

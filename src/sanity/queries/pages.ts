@@ -24,3 +24,12 @@ export const PAGES_QUERY = defineQuery(`
     body
   }
 `);
+
+export const PAGE_SLUGS_QUERY = defineQuery(`
+  *[
+    _type == "page" &&
+    defined(slug.current)
+  ] | order(_updatedAt desc)[0...1] {
+    "slug": slug.current
+  }
+`);
