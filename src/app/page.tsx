@@ -1,5 +1,5 @@
-import LinkWrapper from '@/components/LinkWrapper';
-import Map, { type Place } from '@/components/Map';
+import type { Place } from '@/components/Map';
+import HomeTemplate from '@/templates/Home';
 import { client } from '@/sanity/client';
 import { PLACES_QUERY } from '@/sanity/queries/places';
 import type { PLACES_QUERY_RESULT } from '@/sanity/sanity.types';
@@ -17,10 +17,5 @@ export default async function Home() {
       place.location.latitude !== null && place.location.longitude !== null,
   );
 
-  return (
-    <>
-      <Map places={mapPlaces} />
-      <LinkWrapper href="/sobre">Sobre</LinkWrapper>
-    </>
-  );
+  return <HomeTemplate places={mapPlaces} />;
 }
