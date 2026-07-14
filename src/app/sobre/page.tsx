@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { PortableText } from 'next-sanity';
+import PageContent from '@/components/PageContent';
 import LinkWrapper from '@/components/LinkWrapper';
 import { client } from '@/sanity/client';
 import { PAGE_QUERY } from '@/sanity/queries/pages';
@@ -29,11 +29,14 @@ export default async function Sobre() {
       <article className={styles.content}>
         <p className={styles.eyebrow}>Sobre o projeto</p>
 
-        <h1 className={styles.title}>{page.heading}</h1>
-
-        <div className={styles.description}>
-          <PortableText value={page.body} />
-        </div>
+        <PageContent
+          heading={page.heading}
+          body={page.body}
+          className={{
+            title: styles.title,
+            body: styles.description,
+          }}
+        />
       </article>
 
       <LinkWrapper href="/">Voltar ao mapa</LinkWrapper>

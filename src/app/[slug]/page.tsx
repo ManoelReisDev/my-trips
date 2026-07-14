@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { PortableText } from '@portabletext/react';
+import PageContent from '@/components/PageContent';
 
 import { client } from '@/sanity/client';
 import { PAGE_QUERY, PAGE_SLUGS_QUERY } from '@/sanity/queries/pages';
@@ -35,9 +35,7 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <main>
-      <h1>{page.heading}</h1>
-
-      <PortableText value={page.body} />
+      <PageContent heading={page.heading} body={page.body} />
     </main>
   );
 }
