@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import type { PAGE_QUERY_RESULT } from '@/sanity/sanity.types';
 
 jest.mock('@portabletext/react', () => ({
   PortableText: ({
@@ -16,7 +17,7 @@ jest.mock('@portabletext/react', () => ({
 
 import PageContent from '.';
 
-const page = {
+const page: Pick<NonNullable<PAGE_QUERY_RESULT>, 'heading' | 'body'> = {
   heading: 'Sobre o My Trips',
   body: [
     {

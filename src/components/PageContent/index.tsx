@@ -1,8 +1,11 @@
 import { PortableText } from '@portabletext/react';
 
-import type { ContentPage } from '@/sanity/types';
+import type { PAGE_QUERY_RESULT } from '@/sanity/sanity.types';
 
-type PageContentProps = Pick<ContentPage, 'heading' | 'body'> & {
+type PageContentProps = Pick<
+  NonNullable<PAGE_QUERY_RESULT>,
+  'heading' | 'body'
+> & {
   className?: {
     title?: string;
     body?: string;

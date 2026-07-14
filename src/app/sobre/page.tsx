@@ -4,7 +4,7 @@ import PageContent from '@/components/PageContent';
 import LinkWrapper from '@/components/LinkWrapper';
 import { client } from '@/sanity/client';
 import { PAGE_QUERY } from '@/sanity/queries/pages';
-import type { ContentPage } from '@/sanity/types';
+import type { PAGE_QUERY_RESULT } from '@/sanity/sanity.types';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Sobre() {
-  const page = await client.fetch<ContentPage | null>(
+  const page = await client.fetch<PAGE_QUERY_RESULT>(
     PAGE_QUERY,
     { slug: 'sobre' },
     { next: { revalidate: 30 } },
