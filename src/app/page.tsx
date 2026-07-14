@@ -1,3 +1,5 @@
+import LinkWrapper from '@/components/LinkWrapper';
+
 import Map, { type Place } from '@/components/Map';
 
 const place = {
@@ -21,5 +23,10 @@ const place2: Place = {
 };
 
 export default function Home() {
-  return <Map places={[place, place2]} />;
+  return (
+    <>
+      <Map places={[place, place2]} />;
+      <LinkWrapper href="/sobre">Sobre</LinkWrapper>
+    </>
+  );
 }
