@@ -1,0 +1,36 @@
+.wrapper {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 8rem 2rem;
+  background:
+    radial-gradient(circle at top, rgb(226 14 141 / 18%), transparent 35%),
+    var(--background);
+}
+
+.content {
+  width: min(72rem, 100%);
+}
+
+.eyebrow {
+  margin-bottom: 1.6rem;
+  color: var(--highlight);
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+}
+
+.title {
+  margin-bottom: 2.4rem;
+  color: var(--white);
+  font-size: clamp(4rem, 8vw, 7rem);
+  line-height: 1;
+}
+
+.description {
+  max-width: 60rem;
+  color: var(--white);
+  font-size: 2rem;
+  line-height: 1.6;
+}
