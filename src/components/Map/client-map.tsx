@@ -6,6 +6,7 @@ import markerIconImage from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import type { MapProps } from './types';
+import { useRouter } from 'next/navigation';
 
 const getImageUrl = (image: { src: string } | string) =>
   typeof image === 'string' ? image : image.src;
@@ -22,6 +23,7 @@ const markerIcon = new Icon({
 });
 
 const ClientMap = ({ places = [] }: MapProps) => {
+  const router = useRouter();
   const firstPlace = places[0];
   const center: [number, number] = firstPlace
     ? [firstPlace.location.latitude, firstPlace.location.longitude]
@@ -38,6 +40,11 @@ const ClientMap = ({ places = [] }: MapProps) => {
           key={place.id}
           position={[place.location.latitude, place.location.longitude]}
           icon={markerIcon}
+          eventHandlers={{
+            click: () => {
+              router.push(`/place/${place.slug}`);
+            },
+          }}
         >
           <Popup>
             <strong>{place.name}</strong>

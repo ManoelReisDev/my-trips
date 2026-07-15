@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import ClientMap from './client-map';
 
 jest.mock('leaflet', () => ({
@@ -22,15 +22,32 @@ jest.mock('react-leaflet', () => ({
   Marker: ({
     position,
     children,
+    eventHandlers,
   }: {
     position: [number, number];
     children: ReactNode;
+    eventHandlers?: {
+      click?: () => void;
+    };
   }) => (
-    <div data-testid="marker" data-position={position.join(',')}>
+    <button
+      type="button"
+      data-testid="marker"
+      data-position={position.join(',')}
+      onClick={eventHandlers?.click}
+    >
       {children}
-    </div>
+    </button>
   ),
   Popup: ({ children }: { children: ReactNode }) => <div>{children}</div>,
+}));
+
+const pushMock = jest.fn();
+
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: pushMock,
+  }),
 }));
 
 const place = {
@@ -46,7 +63,7 @@ const place = {
 const place2 = {
   id: '2',
   name: 'São Luís',
-  slug: 'São Luís',
+  slug: 'sao-luis',
   location: {
     latitude: -2.5307,
     longitude: -44.3068,
@@ -91,5 +108,13 @@ describe('ClientMap', () => {
     expect(markers[1]).toHaveAttribute('data-position', '-2.5307,-44.3068');
     expect(screen.getByText('Petrópolis')).toBeInTheDocument();
     expect(screen.getByText('São Luís')).toBeInTheDocument();
+  });
+
+  it('navigates to the place page when clicking a marker', () => {
+    render(<ClientMap places={[place2]} />);
+
+    fireEvent.click(screen.getByTestId('marker'));
+
+    expect(pushMock).toHaveBeenCalledWith('/place/sao-luis');
   });
 });
