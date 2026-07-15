@@ -70,5 +70,10 @@ describe('PlaceTemplate', () => {
         encodeURIComponent('https://cdn.sanity.io/images/sao-luis.jpg'),
       ),
     );
+
+    expect(screen.getByLabelText('Voltar para o mapa')).toHaveAttribute(
+      'href',
+      '/',
+    );
   });
 });

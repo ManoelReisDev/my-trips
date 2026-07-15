@@ -1,7 +1,15 @@
 import type { Metadata } from 'next';
+import { Poppins } from 'next/font/google';
 import 'leaflet/dist/leaflet.css';
 import { StyledComponentsRegistry } from '@/lib/styled-components-registry';
 import { GlobalStyles } from '@/styles/global-styles';
+
+const poppins = Poppins({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-poppins',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'My Trips',
@@ -20,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body>
+      <body className={poppins.variable}>
         <StyledComponentsRegistry>
           <GlobalStyles />
           {children}

@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import { PortableText } from '@portabletext/react';
+import LinkWrapper from '@/components/LinkWrapper';
+import * as S from './styles';
 
 import type { PLACE_QUERY_RESULT } from '@/sanity/sanity.types';
 
@@ -20,22 +22,33 @@ export default function PlaceTemplate({ place }: PlaceTemplateProps) {
   );
 
   return (
-    <main>
-      <h1>{place.name}</h1>
+    <S.Wrapper>
+      <LinkWrapper href="/" aria-label="Voltar para o mapa">
+        Voltar para o mapa
+      </LinkWrapper>
 
-      {place.description && <PortableText value={place.description} />}
+      <S.Container>
+        <S.Heading>{place.name}</S.Heading>
 
-      <div>
-        {gallery.map((image) => (
-          <Image
-            key={image.url}
-            src={image.url}
-            alt={place.name}
-            width={image.width}
-            height={image.height}
-          />
-        ))}
-      </div>
-    </main>
+        {place.description && (
+          <S.Body>
+            <PortableText value={place.description} />
+          </S.Body>
+        )}
+
+        <S.Gallery>
+          {gallery.map((image) => (
+            <S.GalleryImage key={image.url}>
+              <Image
+                src={image.url}
+                alt={place.name}
+                width={image.width}
+                height={image.height}
+              />
+            </S.GalleryImage>
+          ))}
+        </S.Gallery>
+      </S.Container>
+    </S.Wrapper>
   );
 }
