@@ -44,6 +44,7 @@ export default function PlaceTemplate({ place }: PlaceTemplateProps) {
                 alt={place.name}
                 width={image.width}
                 height={image.height}
+                quality={75}
               />
             </S.GalleryImage>
           ))}
