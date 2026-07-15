@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import { PortableText } from '@portabletext/react';
+import ImageCarousel from '@/components/ImageCarousel';
 import LinkWrapper from '@/components/LinkWrapper';
 import * as S from './styles';
 
@@ -36,19 +36,7 @@ export default function PlaceTemplate({ place }: PlaceTemplateProps) {
           </S.Body>
         )}
 
-        <S.Gallery>
-          {gallery.map((image) => (
-            <S.GalleryImage key={image.url}>
-              <Image
-                src={image.url}
-                alt={place.name}
-                width={image.width}
-                height={image.height}
-                quality={75}
-              />
-            </S.GalleryImage>
-          ))}
-        </S.Gallery>
+        <ImageCarousel images={gallery} alt={place.name} />
       </S.Container>
     </S.Wrapper>
   );

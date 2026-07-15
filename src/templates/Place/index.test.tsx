@@ -62,7 +62,11 @@ describe('PlaceTemplate', () => {
       ),
     ).toBeInTheDocument();
 
-    const image = screen.getByRole('img', { name: 'São Luís' });
+    expect(
+      screen.getByRole('region', { name: 'Galeria de imagens de São Luís' }),
+    ).toBeInTheDocument();
+
+    const image = screen.getByRole('img', { name: 'São Luís 1' });
 
     expect(image).toHaveAttribute(
       'src',
