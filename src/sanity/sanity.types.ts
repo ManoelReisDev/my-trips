@@ -284,6 +284,38 @@ export type PAGE_SLUGS_QUERY_RESULT = Array<{
 }>;
 
 // Source: ../my-trips/src/sanity/queries/places.ts
+// Variable: PLACE_QUERY
+// Query: *[    _type == "place" &&    slug.current == $slug  ][0] {    "id": _id,    name,    "slug": slug.current,    description,    gallery[] {      "url": asset->url,      "width": asset->metadata.dimensions.width,      "height": asset->metadata.dimensions.height    }  }
+export type PLACE_QUERY_RESULT = {
+  id: string;
+  name: string;
+  slug: string;
+  description: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: 'span';
+      _key: string;
+    }>;
+    style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal';
+    listItem?: 'bullet' | 'number';
+    markDefs?: Array<{
+      href?: string;
+      _type: 'link';
+      _key: string;
+    }>;
+    level?: number;
+    _type: 'block';
+    _key: string;
+  }> | null;
+  gallery: Array<{
+    url: string | null;
+    width: number | null;
+    height: number | null;
+  }>;
+} | null;
+
+// Source: ../my-trips/src/sanity/queries/places.ts
 // Variable: PLACES_QUERY
 // Query: *[  _type == "place" &&  defined(name) &&  defined(slug.current) &&  defined(location.lat) &&  defined(location.lng)] | order(name asc) {  "id": _id,  name,  "slug": slug.current,  "location": {    "latitude": location.lat,    "longitude": location.lng  }}
 export type PLACES_QUERY_RESULT = Array<{
@@ -296,6 +328,13 @@ export type PLACES_QUERY_RESULT = Array<{
   };
 }>;
 
+// Source: ../my-trips/src/sanity/queries/places.ts
+// Variable: PLACE_SLUGS_QUERY
+// Query: *[    _type == "place" &&    defined(slug.current)  ] | order(_updatedAt desc)[0...3] {    "slug": slug.current  }
+export type PLACE_SLUGS_QUERY_RESULT = Array<{
+  slug: string;
+}>;
+
 // Query TypeMap
 import '@sanity/client';
 declare module '@sanity/client' {
@@ -303,6 +342,8 @@ declare module '@sanity/client' {
     '\n  *[\n    _type == "page" &&\n    slug.current == $slug\n  ][0] {\n    "id": _id,\n    heading,\n    "slug": slug.current,\n    body\n  }\n': PAGE_QUERY_RESULT;
     '\n  *[\n    _type == "page" &&\n    defined(heading) &&\n    defined(slug.current)\n  ] | order(heading asc) {\n    "id": _id,\n    heading,\n    "slug": slug.current,\n    body\n  }\n': PAGES_QUERY_RESULT;
     '\n  *[\n    _type == "page" &&\n    defined(slug.current)\n  ] | order(_updatedAt desc)[0...1] {\n    "slug": slug.current\n  }\n': PAGE_SLUGS_QUERY_RESULT;
+    '\n  *[\n    _type == "place" &&\n    slug.current == $slug\n  ][0] {\n    "id": _id,\n    name,\n    "slug": slug.current,\n    description,\n    gallery[] {\n      "url": asset->url,\n      "width": asset->metadata.dimensions.width,\n      "height": asset->metadata.dimensions.height\n    }\n  }\n': PLACE_QUERY_RESULT;
     '*[\n  _type == "place" &&\n  defined(name) &&\n  defined(slug.current) &&\n  defined(location.lat) &&\n  defined(location.lng)\n] | order(name asc) {\n  "id": _id,\n  name,\n  "slug": slug.current,\n  "location": {\n    "latitude": location.lat,\n    "longitude": location.lng\n  }\n}': PLACES_QUERY_RESULT;
+    '\n  *[\n    _type == "place" &&\n    defined(slug.current)\n  ] | order(_updatedAt desc)[0...3] {\n    "slug": slug.current\n  }\n': PLACE_SLUGS_QUERY_RESULT;
   }
 }
