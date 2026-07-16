@@ -4,9 +4,9 @@ import { Icon } from 'leaflet';
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIconImage from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+import { useRouter } from 'nextjs-toploader/app';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import type { MapProps } from './types';
-import { useRouter } from 'next/navigation';
 
 const getImageUrl = (image: { src: string } | string) =>
   typeof image === 'string' ? image : image.src;

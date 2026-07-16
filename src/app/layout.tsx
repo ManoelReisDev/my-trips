@@ -3,6 +3,7 @@ import { Poppins } from 'next/font/google';
 import 'leaflet/dist/leaflet.css';
 import { StyledComponentsRegistry } from '@/lib/styled-components-registry';
 import { GlobalStyles } from '@/styles/global-styles';
+import RouteProgress from '@/components/RouteProgress';
 
 const poppins = Poppins({
   subsets: ['latin', 'latin-ext'],
@@ -30,6 +31,7 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body className={poppins.variable}>
         <StyledComponentsRegistry>
+          <RouteProgress />
           <GlobalStyles />
           {children}
         </StyledComponentsRegistry>

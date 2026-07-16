@@ -44,7 +44,7 @@ jest.mock('react-leaflet', () => ({
 
 const pushMock = jest.fn();
 
-jest.mock('next/navigation', () => ({
+jest.mock('nextjs-toploader/app', () => ({
   useRouter: () => ({
     push: pushMock,
   }),
