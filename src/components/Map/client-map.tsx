@@ -11,7 +11,8 @@ import type { MapProps } from './types';
 const getImageUrl = (image: { src: string } | string) =>
   typeof image === 'string' ? image : image.src;
 
-const defaultCenter: [number, number] = [-23.55052, -46.633308];
+const brazilCenter: [number, number] = [-14.235, -51.9253];
+const defaultZoom = 5;
 const markerIcon = new Icon({
   iconUrl: getImageUrl(markerIconImage),
   iconRetinaUrl: getImageUrl(markerIcon2x),
@@ -24,13 +25,13 @@ const markerIcon = new Icon({
 
 const ClientMap = ({ places = [] }: MapProps) => {
   const router = useRouter();
-  const firstPlace = places[0];
-  const center: [number, number] = firstPlace
-    ? [firstPlace.location.latitude, firstPlace.location.longitude]
-    : defaultCenter;
 
   return (
-    <MapContainer center={center} zoom={13} scrollWheelZoom={false}>
+    <MapContainer
+      center={brazilCenter}
+      zoom={defaultZoom}
+      scrollWheelZoom={false}
+    >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

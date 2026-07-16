@@ -9,12 +9,14 @@ jest.mock('leaflet', () => ({
 jest.mock('react-leaflet', () => ({
   MapContainer: ({
     center,
+    zoom,
     children,
   }: {
     center: [number, number];
+    zoom: number;
     children: ReactNode;
   }) => (
-    <div data-testid="map" data-center={center.join(',')}>
+    <div data-testid="map" data-center={center.join(',')} data-zoom={zoom}>
       {children}
     </div>
   ),
@@ -79,13 +81,14 @@ describe('ClientMap', () => {
     expect(screen.queryByTestId('marker')).not.toBeInTheDocument();
   });
 
-  it('centers the map on the first place', () => {
+  it('starts centered on Brazil', () => {
     render(<ClientMap places={[place, place2]} />);
 
     expect(screen.getByTestId('map')).toHaveAttribute(
       'data-center',
-      '-22.5112,-43.1779',
+      '-14.235,-51.9253',
     );
+    expect(screen.getByTestId('map')).toHaveAttribute('data-zoom', '5');
   });
 
   it('renders a marker with the place coordinates and name', () => {
