@@ -28,7 +28,7 @@ describe('<RouteProgress />', () => {
 
     expect(screen.getByTestId('route-progress')).toHaveAttribute(
       'data-color',
-      '#e20e8d',
+      '#f97316',
     );
 
     expect(screen.getByTestId('route-progress')).toHaveAttribute(
