@@ -46,6 +46,9 @@ describe('<PageContent />', () => {
     ).toBeInTheDocument();
 
     expect(screen.getByText('Conteúdo vindo do Sanity.')).toBeInTheDocument();
+    expect(
+      screen.getByRole('link', { name: 'Voltar ao mapa' }),
+    ).toHaveAttribute('href', '/');
   });
 
   it('applies custom class names', () => {
@@ -54,6 +57,8 @@ describe('<PageContent />', () => {
         heading={page.heading}
         body={page.body}
         className={{
+          wrapper: 'custom-wrapper',
+          container: 'custom-container',
           title: 'custom-title',
           body: 'custom-body',
         }}
@@ -63,6 +68,18 @@ describe('<PageContent />', () => {
     expect(
       screen.getByRole('heading', { name: 'Sobre o My Trips' }),
     ).toHaveClass('custom-title');
+
+    expect(
+      screen
+        .getByRole('heading', { name: 'Sobre o My Trips' })
+        .closest('.custom-wrapper'),
+    ).toBeInTheDocument();
+
+    expect(
+      screen
+        .getByRole('heading', { name: 'Sobre o My Trips' })
+        .closest('.custom-container'),
+    ).toBeInTheDocument();
 
     expect(
       screen.getByText('Conteúdo vindo do Sanity.').closest('.custom-body'),

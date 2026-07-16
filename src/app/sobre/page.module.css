@@ -41,3 +41,22 @@
 .description p + p {
   margin-top: 1.6rem;
 }
+
+.footer {
+  position: fixed;
+  bottom: var(--medium);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.footer a {
+  color: var(--color-text-muted);
+  font-size: 1.4rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.footer a:hover,
+.footer a:focus-visible {
+  color: var(--color-primary);
+}

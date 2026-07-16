@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import PageContent from '@/components/PageContent';
 import LinkWrapper from '@/components/LinkWrapper';
@@ -38,6 +39,10 @@ export default async function Sobre() {
           }}
         />
       </article>
+
+      <footer className={styles.footer}>
+        <Link href="/terms-of-service">Termos de uso</Link>
+      </footer>
 
       <LinkWrapper href="/">Voltar ao mapa</LinkWrapper>
     </main>

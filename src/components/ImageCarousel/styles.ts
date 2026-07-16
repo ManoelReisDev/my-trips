@@ -15,6 +15,7 @@ export const Wrapper = styled.section`
   overflow: hidden;
   border-radius: 0.4rem;
   aspect-ratio: 16 / 9;
+  border: 0.1rem solid var(--color-border);
   background: var(--color-surface);
   background-image: linear-gradient(
     to right,
@@ -24,6 +25,7 @@ export const Wrapper = styled.section`
     var(--color-surface) 100%
   );
   background-size: 80rem 100%;
+  box-shadow: 0 1.6rem 4rem var(--color-shadow);
   animation: ${shimmer} 1s linear infinite;
 `;
 
