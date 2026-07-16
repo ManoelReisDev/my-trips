@@ -1,13 +1,11 @@
-import type { ReactNode } from 'react';
+import type { ComponentProps } from 'react';
+import Link from 'next/link';
 import * as S from './styles';
 
-export type LinkWrapperProps = {
-  href: string;
-  children: ReactNode;
-};
+export type LinkWrapperProps = ComponentProps<typeof Link>;
 
-const LinkWrapper = ({ href, children }: LinkWrapperProps) => {
-  return <S.Wrapper href={href}>{children}</S.Wrapper>;
+const LinkWrapper = ({ children, ...props }: LinkWrapperProps) => {
+  return <S.Wrapper {...props}>{children}</S.Wrapper>;
 };
 
 export default LinkWrapper;

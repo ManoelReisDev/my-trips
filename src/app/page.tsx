@@ -1,32 +1,21 @@
-import LinkWrapper from '@/components/LinkWrapper';
+import type { Place } from '@/components/Map';
+import HomeTemplate from '@/templates/Home';
+import { client } from '@/sanity/client';
+import { PLACES_QUERY } from '@/sanity/queries/places';
+import type { PLACES_QUERY_RESULT } from '@/sanity/sanity.types';
 
-import Map, { type Place } from '@/components/Map';
+const options = { next: { revalidate: 30 } };
 
-const place = {
-  id: '1',
-  name: 'Petrópolis',
-  slug: 'petropolis',
-  location: {
-    latitude: -22.5112,
-    longitude: -43.1779,
-  },
-};
-
-const place2: Place = {
-  id: '2',
-  name: 'São Luís',
-  slug: 'São Luís',
-  location: {
-    latitude: -2.5307,
-    longitude: -44.3068,
-  },
-};
-
-export default function Home() {
-  return (
-    <>
-      <Map places={[place, place2]} />;
-      <LinkWrapper href="/sobre">Sobre</LinkWrapper>
-    </>
+export default async function Home() {
+  const places = await client.fetch<PLACES_QUERY_RESULT>(
+    PLACES_QUERY,
+    {},
+    options,
   );
+  const mapPlaces: Place[] = places.filter(
+    (place): place is Place =>
+      place.location.latitude !== null && place.location.longitude !== null,
+  );
+
+  return <HomeTemplate places={mapPlaces} />;
 }

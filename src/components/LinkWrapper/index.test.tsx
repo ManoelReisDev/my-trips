@@ -21,4 +21,17 @@ describe('LinkWrapper', () => {
     expect(link).toHaveStyleRule('top', 'var(--medium)');
     expect(link).toHaveStyleRule('right', 'var(--medium)');
   });
+
+  it('passes accessibility props to the link', () => {
+    render(
+      <LinkWrapper href="/" aria-label="Voltar para o mapa">
+        ×
+      </LinkWrapper>,
+    );
+
+    expect(screen.getByLabelText('Voltar para o mapa')).toHaveAttribute(
+      'href',
+      '/',
+    );
+  });
 });

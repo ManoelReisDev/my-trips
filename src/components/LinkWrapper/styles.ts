@@ -14,9 +14,11 @@ export const Wrapper = styled(Link)`
   padding: 1rem 1.5rem;
   border-radius: 0.4rem;
 
-  background: var(--white);
-  color: var(--highlight);
-  box-shadow: 0 0.2rem 0.8rem rgb(0 0 0 / 20%);
+  border: 0.1rem solid var(--color-border);
+
+  background: var(--color-surface);
+  color: var(--color-primary);
+  box-shadow: 0 0.2rem 0.8rem var(--color-shadow);
 
   transition:
     transform 0.2s ease,
@@ -24,11 +26,12 @@ export const Wrapper = styled(Link)`
 
   &:hover {
     transform: translateY(-0.2rem);
-    box-shadow: 0 0.4rem 1.2rem rgb(0 0 0 / 30%);
+    color: var(--color-primary-hover);
+    box-shadow: 0 0.4rem 1.2rem var(--color-shadow);
   }
 
   &:focus-visible {
-    outline: 0.3rem solid var(--highlight);
+    outline: 0.3rem solid var(--color-primary);
     outline-offset: 0.3rem;
   }
 `;

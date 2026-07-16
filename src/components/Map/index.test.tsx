@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import ClientMap from './client-map';
 
 jest.mock('leaflet', () => ({
@@ -9,12 +9,14 @@ jest.mock('leaflet', () => ({
 jest.mock('react-leaflet', () => ({
   MapContainer: ({
     center,
+    zoom,
     children,
   }: {
     center: [number, number];
+    zoom: number;
     children: ReactNode;
   }) => (
-    <div data-testid="map" data-center={center.join(',')}>
+    <div data-testid="map" data-center={center.join(',')} data-zoom={zoom}>
       {children}
     </div>
   ),
@@ -22,15 +24,32 @@ jest.mock('react-leaflet', () => ({
   Marker: ({
     position,
     children,
+    eventHandlers,
   }: {
     position: [number, number];
     children: ReactNode;
+    eventHandlers?: {
+      click?: () => void;
+    };
   }) => (
-    <div data-testid="marker" data-position={position.join(',')}>
+    <button
+      type="button"
+      data-testid="marker"
+      data-position={position.join(',')}
+      onClick={eventHandlers?.click}
+    >
       {children}
-    </div>
+    </button>
   ),
   Popup: ({ children }: { children: ReactNode }) => <div>{children}</div>,
+}));
+
+const pushMock = jest.fn();
+
+jest.mock('nextjs-toploader/app', () => ({
+  useRouter: () => ({
+    push: pushMock,
+  }),
 }));
 
 const place = {
@@ -46,7 +65,7 @@ const place = {
 const place2 = {
   id: '2',
   name: 'São Luís',
-  slug: 'São Luís',
+  slug: 'sao-luis',
   location: {
     latitude: -2.5307,
     longitude: -44.3068,
@@ -62,13 +81,14 @@ describe('ClientMap', () => {
     expect(screen.queryByTestId('marker')).not.toBeInTheDocument();
   });
 
-  it('centers the map on the first place', () => {
+  it('starts centered on Brazil', () => {
     render(<ClientMap places={[place, place2]} />);
 
     expect(screen.getByTestId('map')).toHaveAttribute(
       'data-center',
-      '-22.5112,-43.1779',
+      '-14.235,-51.9253',
     );
+    expect(screen.getByTestId('map')).toHaveAttribute('data-zoom', '5');
   });
 
   it('renders a marker with the place coordinates and name', () => {
@@ -91,5 +111,13 @@ describe('ClientMap', () => {
     expect(markers[1]).toHaveAttribute('data-position', '-2.5307,-44.3068');
     expect(screen.getByText('Petrópolis')).toBeInTheDocument();
     expect(screen.getByText('São Luís')).toBeInTheDocument();
+  });
+
+  it('navigates to the place page when clicking a marker', () => {
+    render(<ClientMap places={[place2]} />);
+
+    fireEvent.click(screen.getByTestId('marker'));
+
+    expect(pushMock).toHaveBeenCalledWith('/place/sao-luis');
   });
 });

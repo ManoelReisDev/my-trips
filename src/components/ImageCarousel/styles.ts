@@ -1,0 +1,124 @@
+import styled, { keyframes } from 'styled-components';
+
+const shimmer = keyframes`
+  0% {
+    background-position: -40rem 0;
+  }
+
+  100% {
+    background-position: 40rem 0;
+  }
+`;
+
+export const Wrapper = styled.section`
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.4rem;
+  aspect-ratio: 16 / 9;
+  border: 0.1rem solid var(--color-border);
+  background: var(--color-surface);
+  background-image: linear-gradient(
+    to right,
+    var(--color-surface) 0%,
+    var(--color-border) 20%,
+    var(--color-surface) 40%,
+    var(--color-surface) 100%
+  );
+  background-size: 80rem 100%;
+  box-shadow: 0 1.6rem 4rem var(--color-shadow);
+  animation: ${shimmer} 1s linear infinite;
+`;
+
+export const ImageFrame = styled.div`
+  width: 100%;
+  height: 100%;
+
+  @keyframes imageFadeIn {
+    from {
+      opacity: 0;
+      transform: scale(1.015);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: imageFadeIn 0.28s ease both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    img {
+      animation: none;
+    }
+  }
+`;
+
+export const Button = styled.button`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 4.4rem;
+  height: 4.4rem;
+  border: 0;
+  border-radius: 50%;
+
+  border: 0.1rem solid var(--color-border);
+
+  background: rgb(20 17 15 / 78%);
+  color: var(--color-text);
+  cursor: pointer;
+  font-size: 3rem;
+  line-height: 1;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    background: rgb(20 17 15 / 92%);
+    transform: translateY(-50%) scale(1.04);
+  }
+
+  &:focus-visible {
+    outline: 0.3rem solid var(--color-primary);
+    outline-offset: 0.3rem;
+  }
+`;
+
+export const PreviousButton = styled(Button)`
+  left: 1.6rem;
+`;
+
+export const NextButton = styled(Button)`
+  right: 1.6rem;
+`;
+
+export const Counter = styled.p`
+  position: absolute;
+  right: 1.6rem;
+  bottom: 1.6rem;
+
+  padding: 0.6rem 1rem;
+  border-radius: 999rem;
+
+  border: 0.1rem solid var(--color-border);
+
+  background: rgb(20 17 15 / 78%);
+  color: var(--color-text);
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1;
+`;
