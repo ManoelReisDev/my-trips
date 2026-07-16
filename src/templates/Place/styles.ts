@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const Wrapper = styled.main`
   min-height: 100vh;
   padding: 8rem 2rem;
-  background: var(--background);
-  color: var(--white);
+  background: var(--color-background);
+  color: var(--color-text);
 `;
 
 export const Container = styled.section`
@@ -22,6 +22,7 @@ export const Heading = styled.h1`
 export const Body = styled.div`
   max-width: 72rem;
   margin-bottom: 2rem;
+  color: var(--color-text-muted);
   font-weight: 300;
   line-height: 1.6;
 
