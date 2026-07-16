@@ -13,24 +13,34 @@ export const Container = styled.section`
 `;
 
 export const Heading = styled.h1`
+  margin-top: var(--medium);
   margin-bottom: var(--medium);
   font-size: clamp(3.6rem, 8vw, 7.2rem);
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.4;
+  text-align: center;
 `;
 
 export const Body = styled.div`
-  max-width: 72rem;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
   color: var(--color-text-muted);
   font-weight: 300;
   line-height: 1.6;
+  text-align: justify;
 
   p {
     font-size: 2rem;
   }
 
   p + p {
-    margin-top: 2rem;
+    margin-top: 2.5rem;
+  }
+
+  @media (max-width: 600px) {
+    padding: 1rem;
+
+    p {
+      font-size: 1.8rem;
+    }
   }
 `;
