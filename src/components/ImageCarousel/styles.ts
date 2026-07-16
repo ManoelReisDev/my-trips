@@ -15,13 +15,13 @@ export const Wrapper = styled.section`
   overflow: hidden;
   border-radius: 0.4rem;
   aspect-ratio: 16 / 9;
-  background: #f6f7f8;
+  background: var(--color-surface);
   background-image: linear-gradient(
     to right,
-    #f6f7f8 0%,
-    #edeef1 20%,
-    #f6f7f8 40%,
-    #f6f7f8 100%
+    var(--color-surface) 0%,
+    var(--color-border) 20%,
+    var(--color-surface) 40%,
+    var(--color-surface) 100%
   );
   background-size: 80rem 100%;
   animation: ${shimmer} 1s linear infinite;
@@ -73,8 +73,10 @@ export const Button = styled.button`
   border: 0;
   border-radius: 50%;
 
-  background: rgb(6 9 43 / 78%);
-  color: var(--white);
+  border: 0.1rem solid var(--color-border);
+
+  background: rgb(20 17 15 / 78%);
+  color: var(--color-text);
   cursor: pointer;
   font-size: 3rem;
   line-height: 1;
@@ -84,12 +86,12 @@ export const Button = styled.button`
     transform 0.2s ease;
 
   &:hover {
-    background: rgb(6 9 43 / 92%);
+    background: rgb(20 17 15 / 92%);
     transform: translateY(-50%) scale(1.04);
   }
 
   &:focus-visible {
-    outline: 0.3rem solid var(--highlight);
+    outline: 0.3rem solid var(--color-primary);
     outline-offset: 0.3rem;
   }
 `;
@@ -110,8 +112,10 @@ export const Counter = styled.p`
   padding: 0.6rem 1rem;
   border-radius: 999rem;
 
-  background: rgb(6 9 43 / 78%);
-  color: var(--white);
+  border: 0.1rem solid var(--color-border);
+
+  background: rgb(20 17 15 / 78%);
+  color: var(--color-text);
   font-size: 1.4rem;
   font-weight: 600;
   line-height: 1;

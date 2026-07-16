@@ -4,8 +4,8 @@
   place-items: center;
   padding: 8rem 2rem;
   background:
-    radial-gradient(circle at top, rgb(226 14 141 / 18%), transparent 35%),
-    var(--background);
+    radial-gradient(circle at top, rgb(249 115 22 / 16%), transparent 35%),
+    var(--color-background);
 }
 
 .content {
@@ -14,7 +14,7 @@
 
 .eyebrow {
   margin-bottom: 1.6rem;
-  color: var(--highlight);
+  color: var(--color-primary);
   font-size: 1.6rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -23,14 +23,14 @@
 
 .title {
   margin-bottom: 2.4rem;
-  color: var(--white);
+  color: var(--color-text);
   font-size: clamp(4rem, 8vw, 7rem);
   line-height: 1;
 }
 
 .description {
   max-width: 60rem;
-  color: var(--white);
+  color: var(--color-text-muted);
 }
 
 .description p {
