@@ -1,30 +1,23 @@
 'use client';
 
-import { Icon } from 'leaflet';
-import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
-import markerIconImage from 'leaflet/dist/images/marker-icon.png';
-import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+import { divIcon } from 'leaflet';
 import { useRouter } from 'nextjs-toploader/app';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import type { MapProps } from './types';
 
-const getImageUrl = (image: { src: string } | string) =>
-  typeof image === 'string' ? image : image.src;
-
 const brazilCenter: [number, number] = [-14.235, -51.9253];
 const defaultZoom = 5;
-const markerIcon = new Icon({
-  iconUrl: getImageUrl(markerIconImage),
-  iconRetinaUrl: getImageUrl(markerIcon2x),
-  shadowUrl: getImageUrl(markerShadow),
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
-});
 
 const ClientMap = ({ places = [] }: MapProps) => {
   const router = useRouter();
+
+  const markerIcon = divIcon({
+    className: 'custom-marker',
+    html: '<span class="pin"></span><span class="pulse"></span>',
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+  });
 
   return (
     <MapContainer
