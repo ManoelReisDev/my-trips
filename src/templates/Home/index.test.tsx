@@ -27,6 +27,7 @@ describe('<HomeTemplate />', () => {
     render(<HomeTemplate places={places} />);
 
     expect(screen.getByTestId('map')).toHaveTextContent('Petrópolis');
+    expect(screen.getByText('My Trips')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Sobre' })).toHaveAttribute(
       'href',
       '/sobre',
