@@ -11,7 +11,9 @@ export const Wrapper = styled(Link)`
   align-items: center;
   justify-content: center;
 
-  padding: 1rem 1.5rem;
+  width: 4.4rem;
+  height: 4.4rem;
+  padding: 0;
   border-radius: 0.4rem;
 
   border: 0.1rem solid var(--color-border);

@@ -11,7 +11,7 @@ export const Wrapper = styled.main`
 
 export const Container = styled.section`
   width: min(72rem, 100%);
-  margin: 0 auto;
+  margin: 2rem auto;
 `;
 
 export const Heading = styled.h1`

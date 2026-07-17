@@ -1,4 +1,5 @@
 import { PortableText } from '@portabletext/react';
+import { MoveLeft } from 'lucide-react';
 import ImageCarousel from '@/components/ImageCarousel';
 import LinkWrapper from '@/components/LinkWrapper';
 import * as S from './styles';
@@ -24,7 +25,7 @@ export default function PlaceTemplate({ place }: PlaceTemplateProps) {
   return (
     <S.Wrapper>
       <LinkWrapper href="/" aria-label="Voltar para o mapa">
-        Voltar para o mapa
+        <MoveLeft size={24} />
       </LinkWrapper>
 
       <S.Container>
