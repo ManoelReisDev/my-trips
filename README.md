@@ -1,3 +1,4 @@
+
 # My Trips 🗺️
 
 [![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)](./)
@@ -11,11 +12,8 @@
 
 ## 📸 Preview do Projeto
 
-> Adicione aqui uma captura da Home ou da página de detalhes de um lugar.
-
-```md
-![Preview do My Trips](./public/img/preview.png)
-```
+<img width="1918" height="926" alt="my-trips preview 1 in home" src="https://github.com/user-attachments/assets/f34ef939-d019-4578-83da-ea156329b13b" />
+<img width="1918" height="926" alt="my-trips preview 2 in place  " src="https://github.com/user-attachments/assets/642e0626-2f5b-40da-a966-dc47e4a534e3" />
 
 ## 🛠 Tecnologias Utilizadas
 
