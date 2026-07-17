@@ -16,6 +16,7 @@ jest.mock('@portabletext/react', () => ({
 }));
 
 import PageContent from '.';
+import LinkWrapper from '@/components/LinkWrapper';
 
 const page: Pick<NonNullable<PAGE_QUERY_RESULT>, 'heading' | 'body'> = {
   heading: 'Sobre o My Trips',
@@ -46,6 +47,20 @@ describe('<PageContent />', () => {
     ).toBeInTheDocument();
 
     expect(screen.getByText('Conteúdo vindo do Sanity.')).toBeInTheDocument();
+    expect(
+      screen.queryByRole('link', { name: 'Voltar ao mapa' }),
+    ).not.toBeInTheDocument();
+  });
+
+  it('renders a custom link wrapper', () => {
+    render(
+      <PageContent
+        heading={page.heading}
+        body={page.body}
+        linkWrapper={<LinkWrapper href="/">Voltar ao mapa</LinkWrapper>}
+      />,
+    );
+
     expect(
       screen.getByRole('link', { name: 'Voltar ao mapa' }),
     ).toHaveAttribute('href', '/');

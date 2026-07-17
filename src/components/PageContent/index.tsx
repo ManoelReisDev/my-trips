@@ -1,6 +1,6 @@
+import type { ReactNode } from 'react';
 import { PortableText } from '@portabletext/react';
 
-import LinkWrapper from '@/components/LinkWrapper';
 import type { PAGE_QUERY_RESULT } from '@/sanity/sanity.types';
 import * as S from './styles';
 
@@ -8,6 +8,7 @@ type PageContentProps = Pick<
   NonNullable<PAGE_QUERY_RESULT>,
   'heading' | 'body'
 > & {
+  linkWrapper?: ReactNode;
   className?: {
     wrapper?: string;
     container?: string;
@@ -19,11 +20,12 @@ type PageContentProps = Pick<
 export default function PageContent({
   heading,
   body,
+  linkWrapper,
   className,
 }: PageContentProps) {
   return (
     <S.Wrapper className={className?.wrapper}>
-      <LinkWrapper href="/">Voltar ao mapa</LinkWrapper>
+      {linkWrapper}
 
       <S.Container className={className?.container}>
         <S.Title className={className?.title}>{heading}</S.Title>

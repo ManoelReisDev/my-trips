@@ -10,6 +10,8 @@ import type {
 
 import type { Metadata } from 'next';
 import { buildCanonicalUrl } from '@/lib/seo';
+import { MoveLeft } from 'lucide-react';
+import LinkWrapper from '@/components/LinkWrapper';
 
 export const revalidate = 30;
 export const dynamicParams = true;
@@ -74,7 +76,15 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <main>
-      <PageContent heading={page.heading} body={page.body} />
+      <PageContent
+        heading={page.heading}
+        body={page.body}
+        linkWrapper={
+          <LinkWrapper href="/" aria-label="Voltar ao mapa">
+            <MoveLeft size={24} />
+          </LinkWrapper>
+        }
+      />
     </main>
   );
 }

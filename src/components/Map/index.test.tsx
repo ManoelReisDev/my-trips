@@ -1,9 +1,10 @@
 import type { ReactNode } from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import ClientMap from './client-map';
+import { divIcon } from 'leaflet';
 
 jest.mock('leaflet', () => ({
-  Icon: jest.fn(() => ({})),
+  divIcon: jest.fn(() => ({ type: 'custom-marker-icon' })),
 }));
 
 jest.mock('react-leaflet', () => ({
@@ -119,5 +120,17 @@ describe('ClientMap', () => {
     fireEvent.click(screen.getByTestId('marker'));
 
     expect(pushMock).toHaveBeenCalledWith('/place/sao-luis');
+  });
+
+  it('configures a custom marker icon', () => {
+    render(<ClientMap places={[place]} />);
+
+    expect(divIcon).toHaveBeenCalledWith({
+      className: 'custom-marker',
+      html: '<span class="pin"></span><span class="pulse"></span>',
+      iconSize: [32, 32],
+      iconAnchor: [16, 32],
+      popupAnchor: [0, -32],
+    });
   });
 });

@@ -10,6 +10,7 @@ import { PAGE_QUERY } from '@/sanity/queries/pages';
 import type { PAGE_QUERY_RESULT } from '@/sanity/sanity.types';
 
 import styles from './page.module.css';
+import { MoveLeft } from 'lucide-react';
 
 import { buildCanonicalUrl } from '@/lib/seo';
 
@@ -52,6 +53,11 @@ export default async function Sobre() {
         <PageContent
           heading={page.heading}
           body={page.body}
+          linkWrapper={
+            <LinkWrapper href="/" aria-label="Voltar ao mapa">
+              <MoveLeft size={24} />
+            </LinkWrapper>
+          }
           className={{
             title: styles.title,
             body: styles.description,
@@ -62,8 +68,6 @@ export default async function Sobre() {
       <footer className={styles.footer}>
         <Link href="/terms-of-service">Termos de uso</Link>
       </footer>
-
-      <LinkWrapper href="/">Voltar ao mapa</LinkWrapper>
     </main>
   );
 }
