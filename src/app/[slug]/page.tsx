@@ -8,6 +8,9 @@ import type {
   PAGE_SLUGS_QUERY_RESULT,
 } from '@/sanity/sanity.types';
 
+import type { Metadata } from 'next';
+import { buildCanonicalUrl } from '@/lib/seo';
+
 export const revalidate = 30;
 export const dynamicParams = true;
 
@@ -23,6 +26,40 @@ type PageProps = {
     slug: string;
   }>;
 };
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+
+  const page = await client.fetch<PAGE_QUERY_RESULT>(PAGE_QUERY, {
+    slug,
+  });
+
+  if (!page) {
+    return {};
+  }
+
+  const description = `${page.heading} no My Trips.`;
+
+  return {
+    title: page.heading,
+    description,
+    alternates: {
+      canonical: buildCanonicalUrl(`/${page.slug}`),
+    },
+    openGraph: {
+      title: page.heading,
+      description,
+      url: buildCanonicalUrl(`/${page.slug}`),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: page.heading,
+      description,
+    },
+  };
+}
 
 export default async function Page({ params }: PageProps) {
   const { slug } = await params;

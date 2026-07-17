@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import { StyledComponentsRegistry } from '@/lib/styled-components-registry';
 import { GlobalStyles } from '@/styles/global-styles';
 import RouteProgress from '@/components/RouteProgress';
+import { siteConfig } from '@/app/config/site';
 
 const poppins = Poppins({
   subsets: ['latin', 'latin-ext'],
@@ -13,9 +14,26 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'My Trips',
-  description:
-    'My Trips é um projeto de estudo que tem como objetivo criar uma aplicação web para gerenciar viagens, permitindo que os usuários adicionem, visualizem e organizem suas viagens de forma prática e eficiente.',
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  applicationName: siteConfig.name,
+  openGraph: {
+    type: 'website',
+    locale: siteConfig.locale,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: siteConfig.name,
+    description: siteConfig.description,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: siteConfig.name,
+    description: siteConfig.description,
+  },
   icons: {
     icon: '/img/icon-512.png',
     apple: '/img/icon-512.png',
