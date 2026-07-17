@@ -25,11 +25,19 @@ export const Body = styled.div`
 
   p {
     font-size: 2rem;
-    line-height: 1.9;
+    line-height: 1.6;
     text-align: justify;
   }
 
   p + p {
     margin-top: 1.6rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 2.5rem;
+
+    p {
+      font-size: 2rem;
+    }
   }
 `;
